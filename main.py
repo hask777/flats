@@ -1,13 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
-import lxml
-import csv
 import json
-import pandas as pd
-import os.path
-import time
 import datetime
-from tqdm import tqdm
 from fastapi import FastAPI
 import uvicorn
 
@@ -36,7 +30,7 @@ async def get_new_flats():
     items_count = soup.find('div', class_="current").text
     print(f"{items_count}страниц: {pages}")
 
-    for i in tqdm(range(1, 2)):
+    for i in range(1, 2):
         url = f"https://moyareklama.by/Гомель/квартиры_продажа/все/8/{i}"
         data = requests.get(url)
         print(url)
@@ -131,17 +125,9 @@ async def get_new_flats():
 
     with open('json/flats.json', 'r', encoding='utf-8') as f:
         new_flats = json.loads(f.read())
-
- 
-     
+    
     print("JSON File write!")
-
-    df = pd.read_json('json/flats.json')
-    df.to_csv('csv/flats.csv')
-
-    print('CSV File write!') 
-
     return {"message": new_flats}
 
-# if __name__ == '__main__':
-#     uvicorn.run(app)
+if __name__ == '__main__':
+    uvicorn.run(app)
