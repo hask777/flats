@@ -131,4 +131,4 @@ async def get_new_flats():
     return {"message": 'new_flats'}
 
 if __name__ == '__main__':
-    uvicorn.run(app)
+    uvicorn.run("app", port=5000, reload=True, access_log=False)
