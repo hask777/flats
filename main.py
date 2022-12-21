@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import json
 import datetime
 from fastapi import FastAPI
-import uvicorn
+
 
 app = FastAPI()
 
@@ -129,5 +129,3 @@ async def get_new_flats():
     print("JSON File write!")
     return {"message": new_flats}
 
-if __name__ == '__main__':
-    uvicorn.run(app)
